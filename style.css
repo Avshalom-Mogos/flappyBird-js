@@ -7,4 +7,9 @@
     display: block;
     border: 1px solid black;
     margin: 50px auto;
+    background-image:url("/assets/sprites/background-day.png");
+}
+
+img{
+    display: none;
 }
