@@ -1,7 +1,9 @@
 export default class InputHandler {
     constructor(bird) {
         document.addEventListener("keydown", (event) => {
-            if (event.keyCode === 32) {
+
+            if (event.keyCode === 32 && bird.position.y - bird.height > 0) {
+
                 bird.jump();
                 console.log("space");
             };
@@ -9,8 +11,10 @@ export default class InputHandler {
         });
 
         document.addEventListener("click", (event) => {
-            bird.jump();
-            console.log("tap");
+            if (bird.position.y - bird.height > 0) {
+                bird.jump();
+                console.log("tap");
+            }
         });
     };
 };

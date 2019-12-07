@@ -1,11 +1,11 @@
 export default class Pipe {
-    constructor(gameWidth, gameHeight) {
+    constructor(x, y) {
         this.width = 40;
         this.height = 160;
 
         this.position = {
-            x: gameWidth,
-            y: gameHeight - this.height
+            x: x,
+            y: y
         };
 
         this.jumpHeight = 35;
@@ -13,19 +13,21 @@ export default class Pipe {
     };
 
 
-    draw(ctx, pipeImg) {
-        ctx.drawImage(pipeImg, this.position.x, this.position.y, this.width, this.height);
+    draw(ctx, Img) {
+        ctx.drawImage(Img, this.position.x, this.position.y, this.width, this.height);
         // ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+
     }
 
     update(deltaTime) {
         if (!deltaTime) return;
         this.position.x -= this.speed;
     }
-    addNew(gameWidth, gameHeight) {
-        if (this.position.x === 0 - this.width){
-            this.position.x=gameWidth + this.width,
-            this.position.y= gameHeight - this.height
+
+    addNew(x, y) {
+        if (this.position.x === 0 - this.width) {
+            this.position.x = x;
+            this.position.y = y;
             // ctx.drawImage(pipeImg, this.position.x, this.position.y, this.width, this.height);
 
         }
