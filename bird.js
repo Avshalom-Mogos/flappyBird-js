@@ -9,20 +9,29 @@ export default class Bird {
         };
 
         this.jumpHeight = 35;
-        this.speed = 1;
+        this.fallSpeed = 1;
     };
 
     jump() {
         this.position.y -= this.jumpHeight;
     }
 
-    draw(ctx, birdImg) {
-        ctx.drawImage(birdImg, this.position.x, this.position.y, this.width, this.height);
-        // ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    imgArr = [
+        { img: document.querySelector("#birdUpFlap") },
+        { img: document.querySelector("#birdMidFlap") },
+        { img: document.querySelector("#birdDownFlap") },
+        { img: document.querySelector("#birdUpFlap") }
+    ];
+
+
+    draw(ctx) {
+
+        ctx.drawImage(this.imgArr[0].img, this.position.x, this.position.y, this.width, this.height);
+
+
     }
 
-    update(deltaTime) {
-        if (!deltaTime) return;
-        this.position.y += this.speed;
+    update() {
+        this.position.y += this.fallSpeed;
     }
 };
