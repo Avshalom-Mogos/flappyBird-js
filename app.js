@@ -3,6 +3,7 @@ import TowPipes from "./twoPipes.js"
 import InputHandler from "./input.js"
 import Score from "./score.js";
 import Ground from "./Ground.js"
+import detectCollision from './collision_detecttion.js';
 
 
 const canvas = document.querySelector("#gameScreen");
@@ -40,6 +41,8 @@ function gameLoop() {
     //bird
     bird.draw(ctx);
     bird.update();
+
+    detectCollision(bird, allpipes, ground);
 
     //pipes 
     allpipes.forEach(pairOfPipes => {
