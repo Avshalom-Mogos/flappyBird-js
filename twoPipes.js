@@ -40,8 +40,8 @@ export default class TowPipes {
     }
 
     update() {        
-        this.pipeTopPosition.x -= 5;
-        this.pipeBottomPosition.x -= 5;
+        this.pipeTopPosition.x -= this.speed;
+        this.pipeBottomPosition.x -= this.speed;
     }
 
 
