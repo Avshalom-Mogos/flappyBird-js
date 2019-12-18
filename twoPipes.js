@@ -2,11 +2,14 @@ export default class TowPipes {
     constructor(bird, gameWidth, gameHeight,ground) {
         this.width = 40;
         this.height = gameHeight;
+        this.jumpHeight = 35;
+        this.speed = 1;
         this.gap = bird.height * 4;
         // console.log(ground.height);
 
-        let min = gameHeight - ground.height - 100;//REFACTOR
-        let max = this.gap + 100;
+        let minPipeHeight = (10 * this.height) /100;
+        let min = gameHeight - ground.height - minPipeHeight;
+        let max = this.gap + minPipeHeight;
         let randPose = Math.floor(Math.random() * (max - min + 1) + min);
         console.log(randPose);
 
@@ -22,12 +25,8 @@ export default class TowPipes {
             y: randPose
         };
 
-        console.log(`TOP: x:${this.pipeTopPosition.x} y:${this.pipeTopPosition.y}`);
-        console.log(`BOTTOM: x:${this.pipeBottomPosition.x} y:${this.pipeBottomPosition.y}`);
 
-
-        this.jumpHeight = 35;
-        this.speed = 1;
+     
     };
 
     pipeTopImg = document.querySelector("#pipeTopImg");
@@ -40,8 +39,9 @@ export default class TowPipes {
 
     }
 
-    update() {        this.pipeTopPosition.x -= this.speed;
-        this.pipeBottomPosition.x -= this.speed;
+    update() {        
+        this.pipeTopPosition.x -= 5;
+        this.pipeBottomPosition.x -= 5;
     }
 
 
