@@ -6,7 +6,7 @@ export default class TowPipes {
 
         let randPose = Math.floor(Math.random() * ((this.gap + 100) - 400 + 1) + 400);
         //Math.floor(Math.random() * (max - min + 1) + min);
-        console.log(randPose);
+      
 
 
         this.pipeTopPosition = {
