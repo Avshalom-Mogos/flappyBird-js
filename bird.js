@@ -26,8 +26,7 @@ export default class Bird {
 
     draw(ctx) {
 
-        ctx.drawImage(this.imgArr[0].img, this.position.x, this.position.y, this.width, this.height);
-
+        ctx.drawImage(this.imgArr[0].img, this.position.x, this.position.y, this.width, this.height);        
 
     }
 
