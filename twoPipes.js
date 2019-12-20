@@ -5,13 +5,15 @@ export default class TowPipes {
         this.jumpHeight = 35;
         this.speed = 1;
         this.gap = bird.height * 4;
-        // console.log(ground.height);
+        this.pipeTopImg = document.querySelector("#pipeTopImg");
+        this.pipeBottomImg = document.querySelector("#pipeBottomImg");
+
 
         let minPipeHeight = (10 * this.height) /100;
         let min = gameHeight - ground.height - minPipeHeight;
         let max = this.gap + minPipeHeight;
         let randPose = Math.floor(Math.random() * (max - min + 1) + min);
-        console.log(randPose);
+
 
 
         this.pipeTopPosition = {
@@ -29,9 +31,7 @@ export default class TowPipes {
      
     };
 
-    pipeTopImg = document.querySelector("#pipeTopImg");
-    pipeBottomImg = document.querySelector("#pipeBottomImg");
-
+    
     draw(ctx) {
         ctx.drawImage(this.pipeTopImg, this.pipeTopPosition.x, this.pipeTopPosition.y, this.width, this.height);
         ctx.drawImage(this.pipeBottomImg, this.pipeBottomPosition.x, this.pipeBottomPosition.y, this.width, this.height);

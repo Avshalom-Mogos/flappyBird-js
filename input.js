@@ -5,7 +5,7 @@ export default class InputHandler {
             if (event.keyCode === 32 && bird.position.y - bird.height > 0) {
 
                 bird.jump();
-                console.log("space");
+                // console.log("space");
             };
 
         });
@@ -13,7 +13,7 @@ export default class InputHandler {
         document.addEventListener("click", (event) => {
             if (bird.position.y - bird.height > 0) {
                 bird.jump();
-                console.log("tap");
+                // console.log("tap");
             }
         });
     };
