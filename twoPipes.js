@@ -3,7 +3,7 @@ export default class TowPipes {
         this.width = 40;
         this.height = gameHeight;
         this.jumpHeight = 35;
-        this.speed = 1;
+        this.speed = 2;
         this.gap = bird.height * 4;
         this.pipeTopImg = document.querySelector("#pipeTopImg");
         this.pipeBottomImg = document.querySelector("#pipeBottomImg");

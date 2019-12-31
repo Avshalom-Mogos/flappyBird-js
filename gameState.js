@@ -1,29 +1,38 @@
 
 export default class GameState {
-    constructor(GAME_WIDTH,GAME_HEIGHT) {
-        this.width = 184 ,
-        this.height = 240,
-        
-        this.img = document.querySelector('#menu');
-        this.state = {
+    constructor(GAME_WIDTH, GAME_HEIGHT) {
+
+        this.game = {
+            currentState: 1,
             getReady: 1,
-            gameRuning: 2,
-            gameOver: 3
-        }
-         
-        this.menuPosition = {
-            x :  GAME_WIDTH / 2 - this.width / 2  ,
-            y :  50
+            running: 2,
+            over: 3
         }
 
+        this.getReadyObj = {
+            img: document.querySelector('#getReadyImg'),
+
+            height: 240,
+            width: 184,
+
+            position: {
+                // x: GAME_WIDTH / 2 - this.width / 2, REFACTOR LATER!
+                x: GAME_WIDTH / 2 - 184 / 2,
+                y: 50
+            }
+        }
 
     }
 
-
-    draw(ctx){    
-        ctx.drawImage(this.img, this.menuPosition.x, this.menuPosition.y, this.width, this.height);
+    draw(ctx) {
+        if (this.game.currentState === this.game.getReady) {
+            ctx.drawImage(
+                this.getReadyObj.img,
+                this.getReadyObj.position.x, this.getReadyObj.position.y,
+                this.getReadyObj.width, this.getReadyObj.height
+            );
+        }
     }
-
 
 }
 

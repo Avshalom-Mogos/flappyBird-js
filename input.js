@@ -1,22 +1,37 @@
 export default class InputHandler {
-    constructor(bird) {
-      
-    document.addEventListener("keydown", (event) => {
+    constructor(bird,gameState) {
+
+
+        document.addEventListener("keydown", (event) => {
+
+            if (gameState.game.currentState === gameState.game.getReady) {
+                //change the  state from ready to running
+                gameState.game.currentState = gameState.game.running
+            }
 
             if (event.keyCode === 32 && bird.position.y - bird.height > 0) {
-            this.keyboardevent = event.isTrusted
+               
                 bird.jump();
-               console.log(event)
+                
             };
 
         });
 
-      document.addEventListener("click", (event) => {
+        document.addEventListener("click", (event) => {
+
+            if (gameState.game.currentState === gameState.game.getReady) {
+                //change the  state from ready to running
+                gameState.game.currentState = gameState.game.running
+            }
+
             if (bird.position.y - bird.height > 0) {
-               this.mouseevent = event.isTrusted
+              
                 bird.jump();
-                console.log(this.mouseevent);
+
             }
         });
+
+        
+        
     };
 };

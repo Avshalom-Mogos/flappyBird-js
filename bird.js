@@ -7,6 +7,7 @@ export default class Bird {
         this.height = 24;
         this.sound = new AudioHandler("/assets/audio/wing.wav");
         this.time = time;
+       
 
         this.position = {
             x: 25,
@@ -36,7 +37,7 @@ export default class Bird {
 
 
     index = 0
-    draw(ctx, time) {
+    draw(ctx, time,gameState) {
         //flap animation
         if (this.deg > 89) {
             this.index = 1
@@ -59,13 +60,15 @@ export default class Bird {
         ctx.drawImage(this.imgArr[this.index].img, this.position.x, this.position.y, this.width, this.height);
         ctx.restore();
 
+        if (gameState.game.currentState === gameState.game.running) {
 
-        if (this.deg < 90) {
-            if (this.deg > 0) {
+            if (this.deg < 90) {
+                if (this.deg > 0) {
 
-                this.deg += 4;
+                    this.deg += 4;
+                }
+                this.deg += 1;
             }
-            this.deg += 1;
         }
 
     }

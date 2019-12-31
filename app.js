@@ -24,11 +24,11 @@ let ground = new Ground(GAME_WIDTH, GAME_HEIGHT);
 
 // menu state 
 let gameState = new GameState(GAME_WIDTH,GAME_HEIGHT)
+
 console.log(gameState)
 
 //handle input from user
-let Input = new InputHandler(bird);
-console.log(Input.mouseevent);
+let Input = new InputHandler(bird,gameState);
 
 
 // collision handler
@@ -47,27 +47,19 @@ for (let index = 0; index < numOfPipes; index++) {
 }
 
 
-let state = gameState.state.getReady;
 
 //game loop
 function gameLoop() {
+    console.log(gameState.game.currentState);
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
     //bird
-    bird.draw(ctx, time);
+    bird.draw(ctx, time,gameState);
     time++;
+  
+    gameState.draw(ctx)
 
-    // state before and after an event
-    if (Input.keyboardevent === true || Input.mouseevent === true) {
-        state = gameState.state.gameRuning
-    }
-
-    if (state === gameState.state.getReady) 
-    {
-        gameState.draw(ctx)
-    } 
-
-    else if (state === gameState.state.gameRuning)
+    if (gameState.game.currentState === gameState.game.running)
      {
         allpipes.forEach(pairOfPipes => {
                 pairOfPipes.draw(ctx);
@@ -78,6 +70,7 @@ function gameLoop() {
        score.draw(ctx);  
    }
  
+
 
     //ground
     ground.update();
