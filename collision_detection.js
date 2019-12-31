@@ -10,7 +10,7 @@ export default class Collision {
     detectCollision(bird, allpipes, ground) {
         let collisionGround = ground.partOnePosition.y - bird.height;
 
-        if (bird.position.y == collisionGround) {
+        if (bird.position.y >= collisionGround) {
             console.log("Crushed on Ground");
             this.hitSound.play();
             this.dieSound.play();

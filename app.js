@@ -13,8 +13,11 @@ let ctx = canvas.getContext("2d");
 const GAME_WIDTH = canvas.offsetWidth;
 const GAME_HEIGHT = canvas.offsetHeight;
 
+let time = 0;
+
+
 //create bird
-let bird = new Bird(GAME_WIDTH, GAME_HEIGHT);
+let bird = new Bird(GAME_WIDTH, GAME_HEIGHT,time);
 
 //create ground
 let ground = new Ground(GAME_WIDTH, GAME_HEIGHT)
@@ -36,7 +39,6 @@ let collision = new Collision;
 //score
 let score = new Score(GAME_WIDTH, GAME_HEIGHT)
 
-let time = 0;
 
 //game loop
 function gameLoop() {
@@ -55,6 +57,7 @@ function gameLoop() {
         score.update(bird, pairOfPipes);
         
     });
+    
     //score
     score.draw(ctx);
     
