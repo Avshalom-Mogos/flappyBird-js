@@ -18,12 +18,13 @@ export default class Score {
             }
     }
     draw(ctx) {
-        ctx.fillText(this.score, this.position.x, this.position.y, this.width);
-        ctx.strokeText(this.score, this.position.x, this.position.y, this.width)
         ctx.strokeStyle = this.strokeStyle;
         ctx.fillStyle = this.fillStyle;
         ctx.lineWidth = this.lineWidth;
         ctx.font = this.font;
+        ctx.fillText(this.score, this.position.x, this.position.y, this.width);
+        ctx.strokeText(this.score, this.position.x, this.position.y, this.width)
+        
     }
     update(bird, pairOfPipes) {
         let pipePositioFromTop = (pairOfPipes.pipeTopPosition.y + pairOfPipes.height);
