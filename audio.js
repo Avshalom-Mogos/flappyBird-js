@@ -1,5 +1,7 @@
 export default class AudioHandler {
+
     constructor(src) {
+
         this.sound = document.createElement("audio");
         this.sound.src = src;
         this.sound.setAttribute("preload", "auto");
@@ -15,5 +17,4 @@ export default class AudioHandler {
     stop = function () {
         this.sound.pause();
     }
-
 }

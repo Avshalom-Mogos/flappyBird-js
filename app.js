@@ -1,85 +1,138 @@
-import Bird from "./bird.js"
-import TowPipes from "./twoPipes.js"
-import InputHandler from "./input.js"
+import Bird from "./bird.js";
+import TowPipes from "./twoPipes.js";
+import InputHandler from "./input.js";
 import Score from "./score.js";
-import Ground from "./Ground.js"
+import Ground from "./Ground.js";
 import Collision from './collision_detection.js';
-import GameState from './gameState.js'
+import GameState from './gameState.js';
+import GameOver from './game_over.js';
+import AudioHandler from "./audio.js";
 
-
-
-const canvas = document.querySelector("#gameScreen");
-let ctx = canvas.getContext("2d");
-const GAME_WIDTH = canvas.offsetWidth;
-const GAME_HEIGHT = canvas.offsetHeight;
-
+let allpipes = [];
 let time = 0;
 
+const wingSound = new AudioHandler("/assets/audio/wing.wav");
+const hitSound = new AudioHandler("/assets/audio/hit.wav");
+const dieSound = new AudioHandler("/assets/audio/die.wav");
+const pointSound = new AudioHandler("/assets/audio/point.ogg");
+
+const canvas = document.querySelector("#gameScreen");
+const ctx = canvas.getContext("2d");
+const GAME_WIDTH = canvas.offsetWidth;
+const GAME_HEIGHT = canvas.offsetHeight;
+const numOfPipes = 100;
+
+// localStorage.clear();
+// console.log(localStorage);
+
+// ========================================================================== Init the game
 
 //create bird
-let bird = new Bird(GAME_WIDTH, GAME_HEIGHT,time);
+const bird = new Bird(GAME_WIDTH, GAME_HEIGHT, time, wingSound);
+
+// score
+const score = new Score(GAME_WIDTH, GAME_HEIGHT, pointSound);
+
+// the state of game
+const gameState = new GameState(GAME_WIDTH, GAME_HEIGHT);
+
+// create reset button
+const gameOver = new GameOver(GAME_WIDTH, GAME_HEIGHT);
 
 //create ground
-let ground = new Ground(GAME_WIDTH, GAME_HEIGHT);
-
-// menu state 
-let gameState = new GameState(GAME_WIDTH,GAME_HEIGHT)
-
-console.log(gameState)
-
-//handle input from user
-let Input = new InputHandler(bird,gameState);
-
+const ground = new Ground(GAME_WIDTH, GAME_HEIGHT);
 
 // collision handler
-let collision = new Collision;
+const collision = new Collision(hitSound, dieSound);
 
-//score
-let score = new Score(GAME_WIDTH, GAME_HEIGHT)
-
+//handle input from user
+new InputHandler(bird, gameState, canvas, gameOver, reset);
 
 //create new pipes
-const numOfPipes = 100;
-const allpipes = [];
 for (let index = 0; index < numOfPipes; index++) {
-    allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * 150), GAME_HEIGHT, ground));
 
+    allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * 150), GAME_HEIGHT, ground));
 }
 
+// ========================================================================== End
 
+//=================================================================== Reset the game
 
-//game loop
+function reset() {
+
+    collision.reset();
+    gameState.reset();
+    score.reset();
+    bird.reset();
+    allpipes = [];
+
+    for (let index = 0; index < numOfPipes; index++) {
+
+        allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * 150), GAME_HEIGHT, ground));
+    }
+
+    console.log("reset");  
+}
+
+//=================================================================== End
+
+//=================================================================== Game loop
+
 function gameLoop() {
-    console.log(gameState.game.currentState);
+    // console.log(gameState.game.currentState);
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
     //bird
     bird.draw(ctx, time,gameState);
     time++;
-  
-    gameState.draw(ctx)
-
+    
+    allpipes.forEach(pairOfPipes => {
+        pairOfPipes.draw(ctx);
+        score.update(bird, pairOfPipes);
+        
+        if (gameState.game.currentState === gameState.game.running)
+        {
+            // console.log("next pipe");
+            pairOfPipes.update();
+        }
+    });
+    
     if (gameState.game.currentState === gameState.game.running)
-     {
-        allpipes.forEach(pairOfPipes => {
-                pairOfPipes.draw(ctx);
-                score.update(bird, pairOfPipes);
-                pairOfPipes.update();
-        });
-       bird.update();
-       score.draw(ctx);  
-   }
- 
+    {
+        bird.update();
+        score.drawCurrentScore(ctx);
+    }
+    
+    if(gameState.game.currentState !== gameState.game.over){
 
-
-    //ground
-    ground.update();
-    ground.draw(ctx);
-    //stop game on collision
-    if (collision.detectCollision(bird, allpipes, ground) === false) {
-
-        requestAnimationFrame(gameLoop);
+        //stop ground on collision
+        ground.update(); 
     }
 
+    gameState.draw(ctx)
+
+    //ground
+    ground.draw(ctx);
+
+    if (gameState.game.currentState === gameState.game.running)
+    {
+        if (collision.detectCollision(bird, allpipes, ground) === true) {
+            
+          console.log(gameState.game.currentState);
+          
+            gameState.game.currentState = gameState.game.over;
+        } 
+    }
+    // if game over
+    else if(gameState.game.currentState === gameState.game.over)
+    {
+        score.drawCurrentScore(ctx);
+        score.drawBestScore(ctx);
+    }
+    
+    requestAnimationFrame(gameLoop);
 }
+
 gameLoop();
+
+//=================================================================== End

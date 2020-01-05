@@ -1,5 +1,7 @@
 export default class Ground {
+    
     constructor(gameWidth, gameHeight) {
+
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
 
@@ -11,10 +13,12 @@ export default class Ground {
             x: 0,
             y: this.gameHeight - this.height,
         }
+
         this.partTwoPosition = {
             x: this.partOnePosition.x + this.width,
             y: this.gameHeight - this.height,
         }
+
         this.speed = 1;
     }
 
