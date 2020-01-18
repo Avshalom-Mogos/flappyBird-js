@@ -8,6 +8,7 @@ export default class Ground {
         this.width = this.gameWidth;
         this.height = 60;
         this.img = document.querySelector("#groundImg");
+        this.speed = 2;
 
         this.partOnePosition = {
             x: 0,
@@ -18,8 +19,8 @@ export default class Ground {
             x: this.partOnePosition.x + this.width,
             y: this.gameHeight - this.height,
         }
+        
 
-        this.speed = 1;
     }
 
     draw(ctx) {
@@ -30,13 +31,18 @@ export default class Ground {
     }
 
     update() {
+        //move each part of the ground to the left
         this.partOnePosition.x -= this.speed;
         this.partTwoPosition.x -= this.speed;
 
-        if (this.partOnePosition.x + this.width === 0) {
+        //if one of the parts move out of the screen move it back to right of the screen
+        if (this.partOnePosition.x + this.width <= 0 + this.speed ) {
+            
             this.partOnePosition.x = this.gameWidth;
         }
-        if (this.partTwoPosition.x + this.width === 0) {
+
+        if (this.partTwoPosition.x + this.width <= 0 + this.speed) {
+            
             this.partTwoPosition.x = this.gameWidth ;
         }
     }
