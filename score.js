@@ -49,21 +49,24 @@ export default class Score {
         ctx.strokeText(bestScore, this.bestPosition.x, this.bestPosition.y, this.bestWidth);
     }
 
-    update(bird, pairOfPipes) {
+    update(bird, pairOfPipes,gameState) {
 
         let centerOfGap = (pairOfPipes.pipeTopPosition.x + pairOfPipes.width) / 2;
 
 
 
-        if (bird.position.x === Math.floor(centerOfGap)) {
+        if (gameState.game.currentState === gameState.game.running) {
 
-            this.sound.play();
-            this.score++
+            if (bird.position.x === Math.floor(centerOfGap)) {
 
-            if (this.score > this.best) {
+                this.sound.play();
+                this.score++
 
-                localStorage.setItem("best", this.score);
-                this.best = localStorage.getItem("best");
+                if (this.score > this.best) {
+
+                    localStorage.setItem("best", this.score);
+                    this.best = localStorage.getItem("best");
+                }
             }
         }
     }

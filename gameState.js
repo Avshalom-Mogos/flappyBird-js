@@ -1,9 +1,10 @@
 
 export default class GameState {
-    
+
     constructor(GAME_WIDTH, GAME_HEIGHT) {
 
         this.game = {
+
             currentState: 1,
             getReady: 1,
             running: 2,
@@ -11,11 +12,10 @@ export default class GameState {
         }
 
         this.getReadyObj = {
-            
-            img: document.querySelector('#getReadyImg'),
 
-            height: 240,
+            img: document.querySelector('#getReadyImg'),
             width: 184,
+            height: 240,
 
             position: {
                 // x: GAME_WIDTH / 2 - this.width / 2, REFACTOR LATER!
@@ -26,27 +26,29 @@ export default class GameState {
 
         this.gameOverObj = {
 
-            imgGameOver: document.querySelector("#gameOverImg"),
-            imgRestart: document.querySelector("#restartImg"),
-            gameOverWidth: 200,
-            gameOverHeight: 45,
-            restartWidth: 120,
-            restartHeight: 40,
-    
-            //current position of "Game Over" image
-            gameOverPosition: {
-    
+            img: document.querySelector("#gameOverImg"),
+            width: 200,
+            height: 45,
+
+            position: {
+
+                //current position of "Game Over" image
                 x: ((GAME_WIDTH / 2) - (200 / 2)),
-        
                 y: GAME_HEIGHT / 3,
             },
-            
-            //current position of "Restart Button" image
-            restartPosition: {
-    
-                x: ((GAME_WIDTH / 2) - (120 / 2)),
-    
-                y: GAME_HEIGHT / 2,
+
+            restartBtn: {
+
+                img: document.querySelector("#restartImg"),
+                width: 120,
+                height: 40,
+
+                position: {
+
+                    //current position of "Restart Button" image
+                    x: ((GAME_WIDTH / 2) - (120 / 2)),
+                    y: GAME_HEIGHT / 2,
+                }
             }
         }
     }
@@ -62,24 +64,26 @@ export default class GameState {
             );
         }
 
-        else if(this.game.currentState === this.game.over)
-        {
+        else if (this.game.currentState === this.game.over) {
+
             ctx.drawImage(
-                this.gameOverObj.imgGameOver,
-                this.gameOverObj.gameOverPosition.x, this.gameOverObj.gameOverPosition.y,
-                this.gameOverObj.gameOverWidth, this.gameOverObj.gameOverHeight
+
+                this.gameOverObj.img,
+                this.gameOverObj.position.x, this.gameOverObj.position.y,
+                this.gameOverObj.width, this.gameOverObj.height
             );
 
             ctx.drawImage(
-                this.gameOverObj.imgRestart,
-                this.gameOverObj.restartPosition.x, this.gameOverObj.restartPosition.y,
-                this.gameOverObj.restartWidth, this.gameOverObj.restartHeight
+
+                this.gameOverObj.restartBtn.img,
+                this.gameOverObj.restartBtn.position.x, this.gameOverObj.restartBtn.position.y,
+                this.gameOverObj.restartBtn.width, this.gameOverObj.restartBtn.height
             );
         }
     }
 
     reset() {
-        
+
         this.currentState = 1;
     }
 }

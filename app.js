@@ -5,7 +5,6 @@ import Score from "./score.js";
 import Ground from "./Ground.js";
 import Collision from './collision_detection.js';
 import GameState from './gameState.js';
-import GameOver from './game_over.js';
 import AudioHandler from "./audio.js";
 
 let allpipes = [];
@@ -28,17 +27,14 @@ const spaceBetweenPipes = 165;
 
 // ========================================================================== Init the game
 
+// the state of game
+const gameState = new GameState(GAME_WIDTH, GAME_HEIGHT);
+
 //create bird
 const bird = new Bird(GAME_WIDTH, GAME_HEIGHT, time, wingSound);
 
 // score
 const score = new Score(GAME_WIDTH, GAME_HEIGHT, pointSound);
-
-// the state of game
-const gameState = new GameState(GAME_WIDTH, GAME_HEIGHT);
-
-// create reset button
-const gameOver = new GameOver(GAME_WIDTH, GAME_HEIGHT);
 
 //create ground
 const ground = new Ground(GAME_WIDTH, GAME_HEIGHT);
@@ -47,7 +43,7 @@ const ground = new Ground(GAME_WIDTH, GAME_HEIGHT);
 const collision = new Collision(hitSound, dieSound);
 
 //handle input from user
-new InputHandler(bird, gameState, canvas, gameOver, reset);
+new InputHandler(bird, gameState, canvas, reset);
 
 //create new pipes
 for (let index = 0; index < numOfPipes; index++) {
@@ -72,7 +68,7 @@ function reset() {
         allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * spaceBetweenPipes), GAME_HEIGHT, ground));
     }
 
-    console.log("reset");  
+    console.log("reset");
 }
 
 //=================================================================== End
@@ -84,30 +80,28 @@ function gameLoop() {
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
     //bird
-    bird.draw(ctx, time,gameState);
+    bird.draw(ctx, time, gameState);
     time++;
-    
+
     allpipes.forEach(pairOfPipes => {
         pairOfPipes.draw(ctx);
-        score.update(bird, pairOfPipes);
-        
-        if (gameState.game.currentState === gameState.game.running)
-        {
+        score.update(bird, pairOfPipes,gameState);
+
+        if (gameState.game.currentState === gameState.game.running) {
             // console.log("next pipe");
             pairOfPipes.update();
         }
     });
-    
-    if (gameState.game.currentState === gameState.game.running)
-    {
+
+    if (gameState.game.currentState === gameState.game.running) {
         bird.update();
         score.drawCurrentScore(ctx);
     }
-    
-    if(gameState.game.currentState !== gameState.game.over){
+
+    if (gameState.game.currentState !== gameState.game.over) {
 
         //stop ground on collision
-        ground.update(); 
+        ground.update();
     }
 
     gameState.draw(ctx)
@@ -115,22 +109,20 @@ function gameLoop() {
     //ground
     ground.draw(ctx);
 
-    if (gameState.game.currentState === gameState.game.running)
-    {
+    if (gameState.game.currentState === gameState.game.running) {
         if (collision.detectCollision(bird, allpipes, ground) === true) {
-            
-          console.log(gameState.game.currentState);
-          
+
+            console.log(gameState.game.currentState);
+
             gameState.game.currentState = gameState.game.over;
-        } 
+        }
     }
     // if game over
-    else if(gameState.game.currentState === gameState.game.over)
-    {
+    else if (gameState.game.currentState === gameState.game.over) {
         score.drawCurrentScore(ctx);
         score.drawBestScore(ctx);
     }
-    
+
     requestAnimationFrame(gameLoop);
 }
 
