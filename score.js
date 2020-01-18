@@ -3,6 +3,7 @@ export default class Score {
     constructor(GAME_WIDTH, GAME_HEIGHT, sound) {
 
         this.width = 30;
+        this.bestWidth = 120;
         this.best = localStorage.getItem("best") || 0;
         this.score = 0;
         this.lineWidth = 2;
@@ -19,7 +20,7 @@ export default class Score {
 
         this.bestPosition = {
             
-            x: ((GAME_WIDTH) / 2 - (this.width / 2)),
+            x: ((GAME_WIDTH) / 2 - (this.bestWidth / 2)),
             y: 130
         }
     }
@@ -30,6 +31,7 @@ export default class Score {
         ctx.fillStyle = this.fillStyle;
         ctx.lineWidth = this.lineWidth;
         ctx.font = this.font;
+        
         ctx.fillText(this.score, this.scorePosition.x, this.scorePosition.y, this.width);
         ctx.strokeText(this.score, this.scorePosition.x, this.scorePosition.y, this.width);
     }
@@ -40,8 +42,11 @@ export default class Score {
         ctx.fillStyle = this.fillStyle;
         ctx.lineWidth = this.lineWidth;
         ctx.font = this.font;
-        ctx.fillText(this.best, this.bestPosition.x, this.bestPosition.y, this.width);
-        ctx.strokeText(this.best, this.bestPosition.x, this.bestPosition.y, this.width);
+
+        let bestScore = "Best: " + this.best;
+        
+        ctx.fillText(bestScore, this.bestPosition.x, this.bestPosition.y, this.bestWidth);
+        ctx.strokeText(bestScore, this.bestPosition.x, this.bestPosition.y, this.bestWidth);
     }
 
     update(bird, pairOfPipes) {
