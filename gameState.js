@@ -11,6 +11,8 @@ export default class GameState {
             over: 3
         }
 
+        this.spaceBetween = 50;
+
         this.getReadyObj = {
 
             img: document.querySelector('#getReadyImg'),
@@ -34,7 +36,21 @@ export default class GameState {
 
                 //current position of "Game Over" image
                 x: ((GAME_WIDTH / 2) - (200 / 2)),
-                y: GAME_HEIGHT / 3,
+                y: GAME_HEIGHT / 4
+            },
+
+            scoreBoard: {
+
+                img: document.querySelector("#scoreBoardImg"),
+                width: 200,
+                height: 100,
+
+                position: {
+
+                    //current position of "scoreBoard" image
+                    x: ((GAME_WIDTH / 2) - (200 / 2)),
+                    y: (GAME_HEIGHT / 2.5) 
+                }
             },
 
             restartBtn: {
@@ -47,17 +63,19 @@ export default class GameState {
 
                     //current position of "Restart Button" image
                     x: ((GAME_WIDTH / 2) - (120 / 2)),
-                    y: GAME_HEIGHT / 2,
+                    y: (GAME_HEIGHT / 1.5) 
                 }
             }
         }
+        this.one = 0;
     }
 
     draw(ctx) {
 
         if (this.game.currentState === this.game.getReady) {
-
+            //draw get ready img
             ctx.drawImage(
+
                 this.getReadyObj.img,
                 this.getReadyObj.position.x, this.getReadyObj.position.y,
                 this.getReadyObj.width, this.getReadyObj.height
@@ -66,6 +84,18 @@ export default class GameState {
 
         else if (this.game.currentState === this.game.over) {
 
+            if(!this.one){
+
+                console.log("gameOver");
+                console.log(this.gameOverObj.position.x, this.gameOverObj.position.y);
+                console.log("scoreBoard");
+                console.log(this.gameOverObj.scoreBoard.position.x, this.gameOverObj.scoreBoard.position.y);
+                console.log("restartBtn");
+                console.log(this.gameOverObj.restartBtn.position.x, this.gameOverObj.restartBtn.position.y);
+                this.one++;
+            }
+
+            //draw game over img
             ctx.drawImage(
 
                 this.gameOverObj.img,
@@ -73,6 +103,15 @@ export default class GameState {
                 this.gameOverObj.width, this.gameOverObj.height
             );
 
+            //draw scoreBoard img
+            ctx.drawImage(
+
+                this.gameOverObj.scoreBoard.img,
+                this.gameOverObj.scoreBoard.position.x, this.gameOverObj.scoreBoard.position.y,
+                this.gameOverObj.scoreBoard.width, this.gameOverObj.scoreBoard.height
+            );
+
+            //draw restart button img
             ctx.drawImage(
 
                 this.gameOverObj.restartBtn.img,

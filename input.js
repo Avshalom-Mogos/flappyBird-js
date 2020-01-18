@@ -5,14 +5,13 @@ export default class InputHandler {
         document.addEventListener("keypress", (e) => {
 
             if (gameState.game.currentState === gameState.game.getReady) {
-                //change the  state from ready to running
+                //change the state from ready to running
                 gameState.game.currentState = gameState.game.running;
             }
 
             if ((e.keyCode === 32) && (bird.position.y - bird.height > 0) &&
                 (gameState.game.currentState !== gameState.game.over)) {
-                // console.log("inside");
-
+  
                 bird.jump();
             }
         });
@@ -43,7 +42,7 @@ export default class InputHandler {
                     (e.offsetX > gameState.gameOverObj.restartBtn.position.x &&
                         e.offsetX < gameState.gameOverObj.restartBtn.position.x + gameState.gameOverObj.restartBtn.width)
                 ) {
-                    //change the  state from ready to get ready
+                    //change the state from game over  to get ready
                     gameState.game.currentState = gameState.game.getReady;
 
                     reset();

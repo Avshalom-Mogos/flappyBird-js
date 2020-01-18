@@ -25,31 +25,55 @@ export default class Score {
         }
     }
 
-    drawCurrentScore(ctx) {
+    drawCurrentScore(ctx, gameState) {
 
-        ctx.strokeStyle = this.strokeStyle;
-        ctx.fillStyle = this.fillStyle;
-        ctx.lineWidth = this.lineWidth;
-        ctx.font = this.font;
+        if (gameState.game.currentState === gameState.game.running) {
 
-        ctx.fillText(this.score, this.scorePosition.x, this.scorePosition.y, this.width);
-        ctx.strokeText(this.score, this.scorePosition.x, this.scorePosition.y, this.width);
+            ctx.strokeStyle = this.strokeStyle;
+            ctx.fillStyle = this.fillStyle;
+            ctx.lineWidth = this.lineWidth;
+            ctx.font = this.font;
+
+            ctx.fillText(this.score, this.scorePosition.x, this.scorePosition.y, this.width);
+            ctx.strokeText(this.score, this.scorePosition.x, this.scorePosition.y, this.width);
+        } else if (gameState.game.currentState === gameState.game.over) {
+
+            let scoreBoardObj = gameState.gameOverObj.scoreBoard;
+            let newPose = {
+                x: scoreBoardObj.position.x + scoreBoardObj.width - 45,
+                y: scoreBoardObj.position.y + 47
+            };
+
+
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "black";
+            ctx.font = "28px Teko";
+
+            ctx.fillText(this.score, newPose.x, newPose.y, this.width);
+            ctx.strokeText(this.score, newPose.x, newPose.y, this.width);
+
+            //draw best score
+          
+
+   
+            ctx.fillText(this.best, newPose.x, newPose.y +35, this.width);
+            ctx.strokeText(this.best, newPose.x, newPose.y + 35, this.width);
+        }
+
     }
 
     drawBestScore(ctx) {
 
-        ctx.strokeStyle = this.strokeStyle;
-        ctx.fillStyle = this.fillStyle;
-        ctx.lineWidth = this.lineWidth;
-        ctx.font = this.font;
+        // ctx.strokeStyle = this.strokeStyle;
+        // ctx.fillStyle = this.fillStyle;
+        // ctx.lineWidth = this.lineWidth;
+        // ctx.font = this.font;
 
-        let bestScore = "Best: " + this.best;
+        // let bestScore = "Best: " + this.best;
 
-        ctx.fillText(bestScore, this.bestPosition.x, this.bestPosition.y, this.bestWidth);
-        ctx.strokeText(bestScore, this.bestPosition.x, this.bestPosition.y, this.bestWidth);
     }
 
-    update(bird, pairOfPipes,gameState) {
+    update(bird, pairOfPipes, gameState) {
 
         let centerOfGap = (pairOfPipes.pipeTopPosition.x + pairOfPipes.width) / 2;
 

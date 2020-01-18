@@ -95,7 +95,6 @@ function gameLoop() {
 
     if (gameState.game.currentState === gameState.game.running) {
         bird.update();
-        score.drawCurrentScore(ctx);
     }
 
     if (gameState.game.currentState !== gameState.game.over) {
@@ -117,11 +116,10 @@ function gameLoop() {
             gameState.game.currentState = gameState.game.over;
         }
     }
-    // if game over
-    else if (gameState.game.currentState === gameState.game.over) {
-        score.drawCurrentScore(ctx);
-        score.drawBestScore(ctx);
-    }
+  
+        score.drawCurrentScore(ctx,gameState);
+      
+ 
 
     requestAnimationFrame(gameLoop);
 }
