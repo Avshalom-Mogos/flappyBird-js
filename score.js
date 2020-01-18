@@ -19,19 +19,19 @@ export default class Score {
         }
 
         this.bestPosition = {
-            
+
             x: ((GAME_WIDTH) / 2 - (this.bestWidth / 2)),
             y: 130
         }
     }
 
     drawCurrentScore(ctx) {
-        
+
         ctx.strokeStyle = this.strokeStyle;
         ctx.fillStyle = this.fillStyle;
         ctx.lineWidth = this.lineWidth;
         ctx.font = this.font;
-        
+
         ctx.fillText(this.score, this.scorePosition.x, this.scorePosition.y, this.width);
         ctx.strokeText(this.score, this.scorePosition.x, this.scorePosition.y, this.width);
     }
@@ -44,23 +44,24 @@ export default class Score {
         ctx.font = this.font;
 
         let bestScore = "Best: " + this.best;
-        
+
         ctx.fillText(bestScore, this.bestPosition.x, this.bestPosition.y, this.bestWidth);
         ctx.strokeText(bestScore, this.bestPosition.x, this.bestPosition.y, this.bestWidth);
     }
 
     update(bird, pairOfPipes) {
-        
-        let pipePositioFromTop = (pairOfPipes.pipeTopPosition.y + pairOfPipes.height);
-        let pipePositioFromBottom = (pairOfPipes.pipeBottomPosition.y - bird.height);
 
-        if (bird.position.x === pairOfPipes.pipeTopPosition.x &&
-            bird.position.y > pipePositioFromTop && bird.position.y < pipePositioFromBottom) {
-                this.sound.play();
+        let centerOfGap = (pairOfPipes.pipeTopPosition.x + pairOfPipes.width) / 2;
+
+
+
+        if (bird.position.x === Math.floor(centerOfGap)) {
+
+            this.sound.play();
             this.score++
 
-            if(this.score > this.best)
-            {
+            if (this.score > this.best) {
+
                 localStorage.setItem("best", this.score);
                 this.best = localStorage.getItem("best");
             }
@@ -68,7 +69,7 @@ export default class Score {
     }
 
     reset() {
-        
+
         this.score = 0;
     }
 }

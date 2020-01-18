@@ -21,6 +21,7 @@ const ctx = canvas.getContext("2d");
 const GAME_WIDTH = canvas.offsetWidth;
 const GAME_HEIGHT = canvas.offsetHeight;
 const numOfPipes = 100;
+const spaceBetweenPipes = 165;
 
 // localStorage.clear();
 // console.log(localStorage);
@@ -51,7 +52,7 @@ new InputHandler(bird, gameState, canvas, gameOver, reset);
 //create new pipes
 for (let index = 0; index < numOfPipes; index++) {
 
-    allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * 150), GAME_HEIGHT, ground));
+    allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * spaceBetweenPipes), GAME_HEIGHT, ground));
 }
 
 // ========================================================================== End
@@ -68,7 +69,7 @@ function reset() {
 
     for (let index = 0; index < numOfPipes; index++) {
 
-        allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * 150), GAME_HEIGHT, ground));
+        allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * spaceBetweenPipes), GAME_HEIGHT, ground));
     }
 
     console.log("reset");  
