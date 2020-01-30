@@ -1,9 +1,10 @@
 export default class Bird {
 
     constructor(gameWidth, gameHeight, time, sound) {
-
-        this.width = 34;
-        this.height = 24;
+        
+        this.gameHeight = gameHeight;
+        this.width = 44;
+        this.height = 34;
         this.time = time;
         this.sound = sound;
 
@@ -13,23 +14,21 @@ export default class Bird {
             y: gameHeight / 2 - this.height / 2
         }
 
-        console.log(this.position);
-        
-        this.jumpHeight = 4;
+        this.jumpHeight = 4.5;
         this.fallSpeed = 1;
         this.gravity = 0.2;
         this.deg = 0;
     }
 
     jump() {
-                
+
         this.sound.play();
         this.fallSpeed = -this.jumpHeight;
         this.deg = -25;
     }
 
     imgArr = [
-        
+
         { img: document.querySelector("#birdUpFlap") },
         { img: document.querySelector("#birdMidFlap") },
         { img: document.querySelector("#birdDownFlap") },
@@ -38,7 +37,7 @@ export default class Bird {
 
     index = 0;
 
-    draw(ctx, time,gameState) {
+    draw(ctx, time, gameState) {
 
         //flap animation
         if (this.deg > 89) {
@@ -93,13 +92,9 @@ export default class Bird {
 
         this.position = {
             x: 25,
-            y: 214
+            y: this.gameHeight / 2 - this.height / 2
         }
 
-        this.jumpHeight = 4;
-        this.fallSpeed = 1;
-        this.gravity = 0.2;
         this.deg = 0;
-        this.time = 0;
     }
 }

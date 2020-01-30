@@ -16,12 +16,12 @@ export default class GameState {
         this.getReadyObj = {
 
             img: document.querySelector('#getReadyImg'),
-            width: 184,
-            height: 240,
+            width: 250,
+            height: GAME_HEIGHT / 2,
 
             position: {
                 // x: GAME_WIDTH / 2 - this.width / 2, REFACTOR LATER!
-                x: GAME_WIDTH / 2 - 184 / 2,
+                x: GAME_WIDTH / 2 - 250 / 2,
                 y: 50
             }
         }
@@ -29,45 +29,44 @@ export default class GameState {
         this.gameOverObj = {
 
             img: document.querySelector("#gameOverImg"),
-            width: 200,
-            height: 45,
+            width: 250,
+            height: 50,
 
             position: {
 
                 //current position of "Game Over" image
-                x: ((GAME_WIDTH / 2) - (200 / 2)),
+                x: ((GAME_WIDTH / 2) - (250 / 2)),
                 y: GAME_HEIGHT / 4
             },
 
             scoreBoard: {
 
                 img: document.querySelector("#scoreBoardImg"),
-                width: 200,
-                height: 100,
+                width: 250,
+                height: 120,
 
                 position: {
 
                     //current position of "scoreBoard" image
-                    x: ((GAME_WIDTH / 2) - (200 / 2)),
-                    y: (GAME_HEIGHT / 2.5) 
+                    x: ((GAME_WIDTH / 2) - (250 / 2)),
+                    y: (GAME_HEIGHT / 2.7)
                 }
             },
 
             restartBtn: {
 
                 img: document.querySelector("#restartImg"),
-                width: 120,
-                height: 40,
+                width: 150,
+                height: 50,
 
                 position: {
 
                     //current position of "Restart Button" image
-                    x: ((GAME_WIDTH / 2) - (120 / 2)),
-                    y: (GAME_HEIGHT / 1.5) 
+                    x: ((GAME_WIDTH / 2) - (150 / 2)),
+                    y: (GAME_HEIGHT / 1.7)
                 }
             }
         }
-        this.one = 0;
     }
 
     draw(ctx) {
@@ -83,17 +82,6 @@ export default class GameState {
         }
 
         else if (this.game.currentState === this.game.over) {
-
-            if(!this.one){
-
-                console.log("gameOver");
-                console.log(this.gameOverObj.position.x, this.gameOverObj.position.y);
-                console.log("scoreBoard");
-                console.log(this.gameOverObj.scoreBoard.position.x, this.gameOverObj.scoreBoard.position.y);
-                console.log("restartBtn");
-                console.log(this.gameOverObj.restartBtn.position.x, this.gameOverObj.restartBtn.position.y);
-                this.one++;
-            }
 
             //draw game over img
             ctx.drawImage(

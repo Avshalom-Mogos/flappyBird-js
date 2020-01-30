@@ -6,7 +6,7 @@ export default class Ground {
         this.gameHeight = gameHeight;
 
         this.width = this.gameWidth;
-        this.height = 60;
+        this.height = (gameHeight *10)/100
         this.img = document.querySelector("#groundImg");
         this.speed = 2;
 
@@ -27,7 +27,6 @@ export default class Ground {
 
         ctx.drawImage(this.img, this.partOnePosition.x, this.partOnePosition.y, this.width, this.height);
         ctx.drawImage(this.img, this.partTwoPosition.x, this.partTwoPosition.y, this.width, this.height);
-
     }
 
     update() {

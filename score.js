@@ -7,7 +7,7 @@ export default class Score {
         this.best = localStorage.getItem("best") || 0;
         this.score = 0;
         this.lineWidth = 2;
-        this.font = "55px Teko";
+        this.font = "75px Teko";
         this.strokeStyle = "black";
         this.fillStyle = "white";
         this.sound = sound;
@@ -15,7 +15,7 @@ export default class Score {
         this.scorePosition = {
 
             x: ((GAME_WIDTH / 2) - (this.width / 2)),
-            y: 70
+            y: 90
         }
 
         this.bestPosition = {
@@ -40,44 +40,32 @@ export default class Score {
 
             let scoreBoardObj = gameState.gameOverObj.scoreBoard;
             let newPose = {
-                x: scoreBoardObj.position.x + scoreBoardObj.width - 45,
+                x: scoreBoardObj.position.x + scoreBoardObj.width - 55,
                 y: scoreBoardObj.position.y + 47
             };
 
 
             ctx.lineWidth = 1;
             ctx.strokeStyle = "black";
-            ctx.font = "28px Teko";
+            ctx.fillStyle = "white";
+            ctx.font = "38px Teko";
 
-            ctx.fillText(this.score, newPose.x, newPose.y, this.width);
-            ctx.strokeText(this.score, newPose.x, newPose.y, this.width);
+            ctx.fillText(this.score, newPose.x, newPose.y + 10, this.width);
+            ctx.strokeText(this.score, newPose.x, newPose.y + 10, this.width);
 
             //draw best score
-          
 
-   
-            ctx.fillText(this.best, newPose.x, newPose.y +35, this.width);
-            ctx.strokeText(this.best, newPose.x, newPose.y + 35, this.width);
+
+
+            ctx.fillText(this.best, newPose.x, newPose.y + 57, this.width);
+            ctx.strokeText(this.best, newPose.x, newPose.y + 57, this.width);
         }
-
-    }
-
-    drawBestScore(ctx) {
-
-        // ctx.strokeStyle = this.strokeStyle;
-        // ctx.fillStyle = this.fillStyle;
-        // ctx.lineWidth = this.lineWidth;
-        // ctx.font = this.font;
-
-        // let bestScore = "Best: " + this.best;
 
     }
 
     update(bird, pairOfPipes, gameState) {
 
         let centerOfGap = (pairOfPipes.pipeTopPosition.x + pairOfPipes.width) / 2;
-
-
 
         if (gameState.game.currentState === gameState.game.running) {
 

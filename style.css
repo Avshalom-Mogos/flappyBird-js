@@ -1,13 +1,20 @@
 *{
     margin:0;
     padding:0;
+    box-sizing: border-box;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
 }
 
 #gameScreen{
     display: block;
-    border: 1px solid black;
-    margin: 50px auto;
     background-image:url("./assets/sprites/background-day.png");
+    background-size: 100% 100%;
+    margin: 0 auto;
+   
 }
 
 img{

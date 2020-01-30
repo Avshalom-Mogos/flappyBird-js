@@ -17,14 +17,18 @@ const dieSound = new AudioHandler(`${soundUrl}/die.wav`);
 const pointSound = new AudioHandler(`${soundUrl}/point.ogg`);
 
 const canvas = document.querySelector("#gameScreen");
+console.log(document.body.offsetWidth);
+
 const ctx = canvas.getContext("2d");
+
+canvas.width = document.body.offsetWidth > 500 ? 500 : document.body.offsetWidth;
+canvas.height = document.body.offsetHeight
 const GAME_WIDTH = canvas.offsetWidth;
 const GAME_HEIGHT = canvas.offsetHeight;
-const numOfPipes = 100;
-const spaceBetweenPipes = 165;
+console.log(GAME_WIDTH, GAME_HEIGHT);
 
-// localStorage.clear();
-// console.log(localStorage);
+const numOfPipes = 100;
+const spaceBetweenPipes = GAME_WIDTH / 1.8;
 
 // ========================================================================== Init the game
 
@@ -68,8 +72,6 @@ function reset() {
 
         allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * spaceBetweenPipes), GAME_HEIGHT, ground));
     }
-
-    console.log("reset");
 }
 
 //=================================================================== End
@@ -86,7 +88,7 @@ function gameLoop() {
 
     allpipes.forEach(pairOfPipes => {
         pairOfPipes.draw(ctx);
-        score.update(bird, pairOfPipes,gameState);
+        score.update(bird, pairOfPipes, gameState);
 
         if (gameState.game.currentState === gameState.game.running) {
             // console.log("next pipe");
@@ -112,15 +114,10 @@ function gameLoop() {
     if (gameState.game.currentState === gameState.game.running) {
         if (collision.detectCollision(bird, allpipes, ground) === true) {
 
-            console.log(gameState.game.currentState);
-
             gameState.game.currentState = gameState.game.over;
         }
     }
-  
-        score.drawCurrentScore(ctx,gameState);
-      
- 
+    score.drawCurrentScore(ctx, gameState);
 
     requestAnimationFrame(gameLoop);
 }
