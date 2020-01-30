@@ -2,7 +2,7 @@ import Bird from "./bird.js";
 import TowPipes from "./twoPipes.js";
 import InputHandler from "./input.js";
 import Score from "./score.js";
-import Ground from "./Ground.js";
+import Ground from "./ground.js";
 import Collision from './collision_detection.js';
 import GameState from './gameState.js';
 import AudioHandler from "./audio.js";
