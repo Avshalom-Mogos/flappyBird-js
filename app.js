@@ -10,10 +10,10 @@ import AudioHandler from "./audio.js";
 let allpipes = [];
 let time = 0;
 
-const wingSound = new AudioHandler("/assets/audio/wing.wav");
-const hitSound = new AudioHandler("/assets/audio/hit.wav");
-const dieSound = new AudioHandler("/assets/audio/die.wav");
-const pointSound = new AudioHandler("/assets/audio/point.ogg");
+const wingSound = new AudioHandler("./assets/audio/wing.wav");
+const hitSound = new AudioHandler("./assets/audio/hit.wav");
+const dieSound = new AudioHandler("./assets/audio/die.wav");
+const pointSound = new AudioHandler("./assets/audio/point.ogg");
 
 const canvas = document.querySelector("#gameScreen");
 const ctx = canvas.getContext("2d");
