@@ -10,10 +10,11 @@ import AudioHandler from "./audio.js";
 let allpipes = [];
 let time = 0;
 
-const wingSound = new AudioHandler("./assets/audio/wing.wav");
-const hitSound = new AudioHandler("./assets/audio/hit.wav");
-const dieSound = new AudioHandler("./assets/audio/die.wav");
-const pointSound = new AudioHandler("./assets/audio/point.ogg");
+const soundUrl = "https://raw.githubusercontent.com/avshalom-mogos/js-bird/master/assets/audio"
+const wingSound = new AudioHandler(`${soundUrl}/wing.wav`);
+const hitSound = new AudioHandler(`${soundUrl}/hit.wav`);
+const dieSound = new AudioHandler(`${soundUrl}/die.wav`);
+const pointSound = new AudioHandler(`${soundUrl}/point.ogg`);
 
 const canvas = document.querySelector("#gameScreen");
 const ctx = canvas.getContext("2d");
