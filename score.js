@@ -2,7 +2,7 @@ export default class Score {
 
     constructor(GAME_WIDTH, GAME_HEIGHT, sound) {
 
-        this.width = 30;
+        this.width = 75;
         this.bestWidth = 120;
         this.best = localStorage.getItem("best") || 0;
         this.score = 0;
@@ -16,12 +16,6 @@ export default class Score {
 
             x: ((GAME_WIDTH / 2) - (this.width / 2)),
             y: 90
-        }
-
-        this.bestPosition = {
-
-            x: ((GAME_WIDTH) / 2 - (this.bestWidth / 2)),
-            y: 130
         }
     }
 

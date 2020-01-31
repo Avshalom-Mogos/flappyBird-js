@@ -1,7 +1,7 @@
 export default class Bird {
 
     constructor(gameWidth, gameHeight, time, sound) {
-        
+
         this.gameHeight = gameHeight;
         this.width = 44;
         this.height = 34;
@@ -18,6 +18,14 @@ export default class Bird {
         this.fallSpeed = 1;
         this.gravity = 0.2;
         this.deg = 0;
+
+        this.image = 0;
+        this.images = [
+            document.querySelector("#birdUpFlap"),
+            document.querySelector("#birdMidFlap"),
+            document.querySelector("#birdDownFlap"),
+            document.querySelector("#birdMidFlap")
+        ]
     }
 
     jump() {
@@ -27,32 +35,26 @@ export default class Bird {
         this.deg = -25;
     }
 
-    imgArr = [
+   
 
-        { img: document.querySelector("#birdUpFlap") },
-        { img: document.querySelector("#birdMidFlap") },
-        { img: document.querySelector("#birdDownFlap") },
-        { img: document.querySelector("#birdMidFlap") }
-    ]
-
-    index = 0;
+    
 
     draw(ctx, time, gameState) {
 
         //flap animation
         if (this.deg > 89) {
-            this.index = 1
+            this.image = 1
         }
 
-        else if (time % 5 === 0 && this.index < 4) {
+        else if (time % 5 === 0 && this.image < 4) {
 
             // צריך לעבור על זה
             if (gameState.game.currentState !== gameState.game.over) {
 
-                this.index++;
+                this.image++;
 
-                if (this.index === 4) {
-                    this.index = 0;
+                if (this.image === 4) {
+                    this.image = 0;
                 }
             }
         }
@@ -65,7 +67,7 @@ export default class Bird {
         ctx.rotate(this.deg * Math.PI / 180);
         ctx.translate(-horC, -verC);
 
-        ctx.drawImage(this.imgArr[this.index].img, this.position.x, this.position.y, this.width, this.height);
+        ctx.drawImage(this.images[this.image], this.position.x, this.position.y, this.width, this.height);
         ctx.restore();
 
         if (gameState.game.currentState === gameState.game.running) {
@@ -90,11 +92,7 @@ export default class Bird {
 
     reset() {
 
-        this.position = {
-            x: 25,
-            y: this.gameHeight / 2 - this.height / 2
-        }
-
+        this.position.y = this.gameHeight / 2 - this.height / 2;
         this.deg = 0;
     }
 }

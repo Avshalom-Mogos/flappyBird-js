@@ -1,6 +1,6 @@
 export default class Collision {
 
-    constructor(hitSound, dieSound){
+    constructor(hitSound, dieSound) {
 
         this.hitSound = hitSound;
         this.dieSound = dieSound;
@@ -13,7 +13,6 @@ export default class Collision {
 
         //checking bird collition ground
         if (bird.position.y >= collisionGround) {
-            // console.log("Crushed on Ground");
             this.hitSound.play();
             this.dieSound.play();
             return true;
@@ -29,7 +28,6 @@ export default class Collision {
 
             //checking bird collition top pipe
             if (collitionPipes == bird.width && bird.position.y < rangeTopCollition) {
-                console.log("collitionTopPipe");
                 this.hitSound.play();
                 this.dieSound.play();
                 return true;
@@ -44,7 +42,6 @@ export default class Collision {
 
             //checking bird collision on ceiling on the top pipes
             if (collitionPipes < bird.width && bird.position.y < rangeTopCollition) {
-                console.log("top gap");
                 this.hitSound.play();
                 this.dieSound.play();
                 return true;
@@ -52,7 +49,6 @@ export default class Collision {
 
             //checking bird collition bootom pipe
             if (collitionPipes == bird.width && bird.position.y - allpipes[this.index].height > -rangeBottomCollition - bird.height) {
-                // console.log("collitionBottomPipe");
                 this.hitSound.play();
                 this.dieSound.play();
                 return true;
@@ -60,7 +56,6 @@ export default class Collision {
 
             //checking bird collision on ceiling on the bottom pipes
             if (collitionPipes < bird.width && bird.position.y - allpipes[this.index].height + bird.height > -rangeBottomCollition) {
-                console.log("bottom gap");
                 this.hitSound.play();
                 this.dieSound.play();
                 return true;
