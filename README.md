@@ -14,4 +14,4 @@ Flappy bird written in OOP
 - you needs to pass the pipes without touching them
 
 ## Functionalities
-Restet the game, start the game, make the bird fly
+Restart the game, start the game, make the bird fly
