@@ -10,7 +10,7 @@ import AudioHandler from "./audio.js";
 let allpipes = [];
 let time = 0;
 
-const soundUrl = "https://raw.githubusercontent.com/avshalom-mogos/js-bird/master/assets/audio"
+const soundUrl = "https://raw.githubusercontent.com/avshalom-mogos/flappyBird-js/master/assets/audio"
 const wingSound = new AudioHandler(`${soundUrl}/wing.wav`);
 const hitSound = new AudioHandler(`${soundUrl}/hit.wav`);
 const dieSound = new AudioHandler(`${soundUrl}/die.wav`);
