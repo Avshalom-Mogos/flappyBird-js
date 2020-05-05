@@ -10,11 +10,11 @@ export default class AudioHandler {
         document.body.appendChild(this.sound);
     }
 
-    play = function () {
+    play() {
         this.sound.play();
     }
 
-    stop = function () {
+    stop() {
         this.sound.pause();
     }
 }

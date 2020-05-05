@@ -4,9 +4,9 @@ export default class Collision {
 
         this.hitSound = hitSound;
         this.dieSound = dieSound;
+        this.index = 0;
     }
 
-    index = 0;
 
     detectCollision(bird, allpipes, ground) {
         let collisionGround = ground.partOnePosition.y - bird.height;

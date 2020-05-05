@@ -3,7 +3,7 @@ import TowPipes from "./twoPipes.js";
 import InputHandler from "./input.js";
 import Score from "./score.js";
 import Ground from "./ground.js";
-import Collision from './collision_detection.js';
+import Collision from './collisionDetection.js';
 import GameState from './gameState.js';
 import AudioHandler from "./audio.js";
 
@@ -25,6 +25,8 @@ canvas.width = document.body.offsetWidth > 500 ? 500 : document.body.offsetWidth
 canvas.height = document.body.offsetHeight
 const GAME_WIDTH = canvas.offsetWidth;
 const GAME_HEIGHT = canvas.offsetHeight;
+
+
 
 
 const numOfPipes = 100;
@@ -56,7 +58,7 @@ for (let index = 0; index < numOfPipes; index++) {
     allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * spaceBetweenPipes), GAME_HEIGHT, ground));
 }
 
-// ========================================================================== End
+//========================================================================== End
 
 //=================================================================== Reset the game
 
@@ -79,7 +81,7 @@ function reset() {
 //=================================================================== Game loop
 
 function gameLoop() {
-    
+
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
     //bird
@@ -91,7 +93,7 @@ function gameLoop() {
         score.update(bird, pairOfPipes, gameState);
 
         if (gameState.game.currentState === gameState.game.running) {
-         
+
             pairOfPipes.update();
         }
     });
