@@ -9,7 +9,6 @@ export default class Bird {
         this.sound = sound;
 
         this.position = {
-
             x: 25,
             y: gameHeight / 2 - this.height / 2
         }
@@ -25,7 +24,7 @@ export default class Bird {
             document.querySelector("#birdMidFlap"),
             document.querySelector("#birdDownFlap"),
             document.querySelector("#birdMidFlap")
-        ]
+        ];
     }
 
     jump() {
@@ -35,53 +34,44 @@ export default class Bird {
         this.deg = -25;
     }
 
-   
 
-    
+
+
 
     draw(ctx, time, gameState) {
 
-        //flap animation
+        //when falling stop flapping
         if (this.deg > 89) {
-            this.image = 1
-        }
+            this.image = 1;
 
-        else if (time % 5 === 0 && this.image < 4) {
+        } else if (time % 5 === 0 && this.image < 4) {
 
-            // צריך לעבור על זה
             if (gameState.game.currentState !== gameState.game.over) {
 
                 this.image++;
+                if (this.image === 4) this.image = 0;
+            };
+        };
 
-                if (this.image === 4) {
-                    this.image = 0;
-                }
-            }
-        }
-
-        let horC = this.position.x + this.width / 2;
-        let verC = this.position.y + this.height / 2;
+        const horCenter = this.position.x + this.width / 2;
+        const verCenter = this.position.y + this.height / 2;
 
         ctx.save();
-        ctx.translate(horC, verC);
+        ctx.translate(horCenter, verCenter);
         ctx.rotate(this.deg * Math.PI / 180);
-        ctx.translate(-horC, -verC);
+        ctx.translate(-horCenter, -verCenter);
 
         ctx.drawImage(this.images[this.image], this.position.x, this.position.y, this.width, this.height);
         ctx.restore();
 
         if (gameState.game.currentState === gameState.game.running) {
-
+            //rotate bird downward
             if (this.deg < 90) {
 
-                if (this.deg > 0) {
-
-                    this.deg += 4;
-                }
-
+                if (this.deg > 0) this.deg += 4;
                 this.deg += 1;
-            }
-        }
+            };
+        };
     }
 
     update() {

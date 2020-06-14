@@ -4,14 +4,11 @@ export default class GameState {
     constructor(GAME_WIDTH, GAME_HEIGHT) {
 
         this.game = {
-
             currentState: 1,
             getReady: 1,
             running: 2,
             over: 3
         }
-
-        this.spaceBetween = 50;
 
         this.getReadyObj = {
 
@@ -20,7 +17,6 @@ export default class GameState {
             height: GAME_HEIGHT / 2,
 
             position: {
-                // x: GAME_WIDTH / 2 - this.width / 2, REFACTOR LATER!
                 x: GAME_WIDTH / 2 - 250 / 2,
                 y: 50
             }
@@ -33,8 +29,6 @@ export default class GameState {
             height: 50,
 
             position: {
-
-                //current position of "Game Over" image
                 x: ((GAME_WIDTH / 2) - (250 / 2)),
                 y: GAME_HEIGHT / 4
             },
@@ -46,8 +40,6 @@ export default class GameState {
                 height: 120,
 
                 position: {
-
-                    //current position of "scoreBoard" image
                     x: ((GAME_WIDTH / 2) - (250 / 2)),
                     y: (GAME_HEIGHT / 2.7)
                 }
@@ -60,8 +52,6 @@ export default class GameState {
                 height: 50,
 
                 position: {
-
-                    //current position of "Restart Button" image
                     x: ((GAME_WIDTH / 2) - (150 / 2)),
                     y: (GAME_HEIGHT / 1.7)
                 }
@@ -74,7 +64,6 @@ export default class GameState {
         if (this.game.currentState === this.game.getReady) {
             //draw get ready img
             ctx.drawImage(
-
                 this.getReadyObj.img,
                 this.getReadyObj.position.x, this.getReadyObj.position.y,
                 this.getReadyObj.width, this.getReadyObj.height
@@ -85,7 +74,6 @@ export default class GameState {
 
             //draw game over img
             ctx.drawImage(
-
                 this.gameOverObj.img,
                 this.gameOverObj.position.x, this.gameOverObj.position.y,
                 this.gameOverObj.width, this.gameOverObj.height
@@ -93,7 +81,6 @@ export default class GameState {
 
             //draw scoreBoard img
             ctx.drawImage(
-
                 this.gameOverObj.scoreBoard.img,
                 this.gameOverObj.scoreBoard.position.x, this.gameOverObj.scoreBoard.position.y,
                 this.gameOverObj.scoreBoard.width, this.gameOverObj.scoreBoard.height
@@ -101,7 +88,6 @@ export default class GameState {
 
             //draw restart button img
             ctx.drawImage(
-
                 this.gameOverObj.restartBtn.img,
                 this.gameOverObj.restartBtn.position.x, this.gameOverObj.restartBtn.position.y,
                 this.gameOverObj.restartBtn.width, this.gameOverObj.restartBtn.height

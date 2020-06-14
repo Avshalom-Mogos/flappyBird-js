@@ -10,20 +10,19 @@ export default class TowPipes {
         this.pipeTopImg = document.querySelector("#pipeTopImg");
         this.pipeBottomImg = document.querySelector("#pipeBottomImg");
 
-        let minPipeHeight = (10 * this.height) / 100;
-        let min = gameHeight - ground.height - minPipeHeight;
-        let max = this.gap + minPipeHeight;
-        let randPose = Math.floor(Math.random() * (max - min + 1) + min);
+        const minPipeHeight = (10 * this.height) / 100;
+        const min = gameHeight - ground.height - minPipeHeight;
+        const max = this.gap + minPipeHeight;
+        const randomPosition = Math.floor(Math.random() * (max - min + 1) + min);
 
         this.pipeTopPosition = {
             x: gameWidth,
-            y: randPose - gameHeight - this.gap
-
+            y: randomPosition - gameHeight - this.gap
         };
 
         this.pipeBottomPosition = {
             x: gameWidth,
-            y: randPose
+            y: randomPosition
         };
     };
 
