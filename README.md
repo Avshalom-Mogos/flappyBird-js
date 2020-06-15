@@ -1,6 +1,6 @@
 # Introduction
-Flappy bird written in OOP  
-live link: https://avshalom-mogos.github.io/flappyBird-js
+Flappy bird written in OOP.  
+Link: https://avshalom-mogos.github.io/flappyBird-js
 
 ## Technologies
 - HTML5
