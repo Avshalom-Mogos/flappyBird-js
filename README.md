@@ -8,7 +8,7 @@ live link: https://avshalom-mogos.github.io/flappyBird-js
 - JavaScript
 
 ## Illustration
-<img src="https://user-images.githubusercontent.com/56726154/74055575-e3b8c980-49e8-11ea-99db-c335011b2e71.png" width="500"/>
+<img src="https://raw.githubusercontent.com/Avshalom-Mogos/portfolio/master/src/assests/GIFs/flappyBird.gif"/>
 
 ## How to use?
 - click on the Space on the keyboard to start the game and to make the bird fly
