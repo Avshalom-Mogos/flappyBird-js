@@ -14,4 +14,4 @@ live link: https://avshalom-mogos.github.io/flappyBird-js
 - Press SPACE or tap the screen to make the bird fly. You needs to pass the pipes without touching them.
 
 ## Functionalities
-start/restart the game, make the bird fly.
+Start/restart the game, make the bird fly.
