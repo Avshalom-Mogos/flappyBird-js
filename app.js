@@ -7,7 +7,7 @@ import Collision from './modules/collisionDetection.js';
 import GameState from './modules/gameState.js';
 import AudioHandler from "./modules/audio.js";
 
-let allpipes = [];
+let pipes = [];
 let time = 0;
 
 const soundUrl = "https://raw.githubusercontent.com/avshalom-mogos/flappyBird-js/master/assets/audio";
@@ -20,12 +20,12 @@ const canvas = document.querySelector("#gameScreen");
 const ctx = canvas.getContext("2d");
 
 canvas.width = document.body.offsetWidth > 500 ? 500 : document.body.offsetWidth;
-canvas.height = document.body.offsetHeight
+canvas.height = document.body.offsetHeight;
 const GAME_WIDTH = canvas.offsetWidth;
 const GAME_HEIGHT = canvas.offsetHeight;
+export const PIPE_WIDTH = 55;
+export const SPACE_BETWEEN_PIPES = PIPE_WIDTH * 4;
 
-const numOfPipes = 100;
-const spaceBetweenPipes = GAME_WIDTH / 1.8;
 
 // ========================================================================== Init the game
 
@@ -47,15 +47,18 @@ const collision = new Collision(hitSound, dieSound);
 //handle input from user
 new InputHandler(bird, gameState, canvas, reset);
 
-//create new pipes
-for (let index = 0; index < numOfPipes; index++) {
-
-    allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * spaceBetweenPipes), GAME_HEIGHT, ground));
-}
 
 //========================================================================== End
 
 //=================================================================== Reset the game
+
+function initPipes() {
+    console.log(GAME_WIDTH);
+    const minPipesForScreen = Math.ceil(GAME_WIDTH / (PIPE_WIDTH + (SPACE_BETWEEN_PIPES)));
+    const newPipes = Array.from({ length: minPipesForScreen }, (_, idx) => new TowPipes(bird, GAME_WIDTH, GAME_HEIGHT, ground, idx));
+    return newPipes;
+}
+
 
 function reset() {
 
@@ -63,13 +66,10 @@ function reset() {
     gameState.reset();
     score.reset();
     bird.reset();
-    allpipes = [];
-
-    for (let index = 0; index < numOfPipes; index++) {
-
-        allpipes.push(new TowPipes(bird, GAME_WIDTH + (index * spaceBetweenPipes), GAME_HEIGHT, ground));
-    }
+    pipes = initPipes();
 }
+
+pipes = initPipes();
 
 //=================================================================== End
 
@@ -87,9 +87,8 @@ function gameLoop() {
     bird.draw(ctx, time, gameState);
     time++;
 
-    allpipes.forEach(pairOfPipes => {
+    pipes.forEach(pairOfPipes => {
         score.update(bird, pairOfPipes, gameState);
-
         pairOfPipes.draw(ctx);
         if (gameIsRunning) pairOfPipes.update();
     });
@@ -100,13 +99,13 @@ function gameLoop() {
     //stop ground on collision
     if (!gameIsOver) ground.update();
 
-    gameState.draw(ctx)
+    gameState.draw(ctx);
 
     //ground
     ground.draw(ctx);
 
 
-    if (gameIsRunning && collision.detectCollision(bird, allpipes, ground)) {
+    if (gameIsRunning && collision.detectCollision(bird, pipes, ground)) {
         //end game on collision
         gameState.game.currentState = gameState.game.over;
     };
