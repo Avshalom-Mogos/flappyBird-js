@@ -33,12 +33,12 @@ export default class Ground {
         this.partTwoPosition.x -= this.speed;
 
         //if one of the parts move out of the screen move it back to right of the screen
-        if (this.partOnePosition.x + this.width <= 0) {
+        if ((this.partOnePosition.x + this.width - this.speed) <= 0) {
 
             this.partOnePosition.x = this.gameWidth;
         }
 
-        if (this.partTwoPosition.x + this.width <= 0) {
+        if ((this.partTwoPosition.x + this.width - this.speed) <= 0) {
 
             this.partTwoPosition.x = this.gameWidth;
         }

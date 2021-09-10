@@ -8,10 +8,11 @@ export default class Collision {
     }
 
 
-    detectCollision(bird, allpipes, ground) {
+    detectCollision(bird, pipes, ground) {
+        return false;
         const collisionGround = ground.partOnePosition.y - bird.height;
 
-        //checking bird collition ground
+        //checking bird collision ground
         if (bird.position.y >= collisionGround) {
             this.hitSound.play();
             this.dieSound.play();
@@ -19,12 +20,12 @@ export default class Collision {
         };
 
         //running all over the pipes
-        if (this.index < allpipes.length) {
+        if (this.index < pipes.length) {
 
             //range collition definition
-            const rangeBottomCollition = allpipes[this.index].height - allpipes[this.index].pipeBottomPosition.y;
-            const rangeTopCollition = allpipes[this.index].height + allpipes[this.index].pipeTopPosition.y;
-            const collitionPipes = allpipes[this.index].pipeTopPosition.x - bird.position.x;
+            const rangeBottomCollition = pipes[this.index].height - pipes[this.index].pipeBottomPosition.y;
+            const rangeTopCollition = pipes[this.index].height + pipes[this.index].pipeTopPosition.y;
+            const collitionPipes = pipes[this.index].pipeTopPosition.x - bird.position.x;
 
             //checking bird collition top pipe
             if (collitionPipes == bird.width && bird.position.y < rangeTopCollition) {
@@ -35,8 +36,9 @@ export default class Collision {
 
             //increment the index to catch the next pipe position if the bird passed one.
             //each index represent the current pipe in the array ("allpipes")!!!
-            if (allpipes[this.index].pipeTopPosition.x < bird.position.x - bird.width) {
-                this.index++;
+            if (pipes[this.index].pipeTopPosition.x < bird.position.x - bird.width) {
+                const nextPipeIdx = (this.index + pipes.length - 1) % pipes.length;
+                this.index = nextPipeIdx;
             };
 
             //checking bird collision on ceiling on the top pipes
@@ -47,14 +49,14 @@ export default class Collision {
             };
 
             //checking bird collition bootom pipe
-            if (collitionPipes == bird.width && bird.position.y - allpipes[this.index].height > -rangeBottomCollition - bird.height) {
+            if (collitionPipes == bird.width && bird.position.y - pipes[this.index].height > -rangeBottomCollition - bird.height) {
                 this.hitSound.play();
                 this.dieSound.play();
                 return true;
             };
 
             //checking bird collision on ceiling on the bottom pipes
-            if (collitionPipes < bird.width && bird.position.y - allpipes[this.index].height + bird.height > -rangeBottomCollition) {
+            if (collitionPipes < bird.width && bird.position.y - pipes[this.index].height + bird.height > -rangeBottomCollition) {
                 this.hitSound.play();
                 this.dieSound.play();
                 return true;
