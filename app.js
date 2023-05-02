@@ -20,7 +20,7 @@ const canvas = document.querySelector("#gameScreen");
 const ctx = canvas.getContext("2d");
 
 canvas.width = document.body.offsetWidth > 500 ? 500 : document.body.offsetWidth;
-canvas.height = document.body.offsetHeight
+canvas.height = document.body.offsetHeight;
 const GAME_WIDTH = canvas.offsetWidth;
 const GAME_HEIGHT = canvas.offsetHeight;
 
